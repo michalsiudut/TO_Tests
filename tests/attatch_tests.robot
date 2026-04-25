@@ -45,3 +45,8 @@ AC5 - Verify attached UE gets default bearer 9
     ${get_response}=    Get UE By ID    ${VALID_UE_ID}
     Should Be Equal As Integers    ${get_response.status_code}    200
     Should Contain    ${get_response.text}    9
+
+AC6 - Verify attach with UE ID 0 succeeds
+    [Tags]    attach    spec_mismatch
+    ${response}=    Attach UE With ID    0
+    Should Be Equal As Integers    ${response.status_code}    200
