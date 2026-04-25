@@ -11,14 +11,12 @@ Reset Simulator
     ${response}=    POST On Session    epc    /reset    expected_status=any
     Should Be Equal As Integers    ${response.status_code}    200
 
-Response Status Should Be
-    [Arguments]    ${response}    ${expected_status}
-    Should Be Equal As Integers    ${response.status_code}    ${expected_status}
-
-Response Should Not Be 200
-    [Arguments]    ${response}
-    Should Not Be Equal As Integers    ${response.status_code}    200
-
 Response Body Should Contain
     [Arguments]    ${response}    ${text}
     Should Contain    ${response.text}    ${text}
+
+Response JSON Field Should Be
+    [Arguments]    ${response}    ${field}    ${expected}
+    ${body}=    Set Variable    ${response.json()}
+    ${actual}=    Get From Dictionary    ${body}    ${field}
+    Should Be Equal As Integers    ${actual}    ${expected}
