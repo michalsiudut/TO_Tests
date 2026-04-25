@@ -25,13 +25,3 @@ Detach UE By ID
     [Arguments]    ${ue_id}
     ${response}=    DELETE On Session    epc    /ues/${ue_id}    expected_status=any
     RETURN    ${response}
-
-UE Should Exist
-    [Arguments]    ${ue_id}
-    ${response}=    Get UE By ID    ${ue_id}
-    Should Be Equal As Integers    ${response.status_code}    200
-
-UE Should Not Exist
-    [Arguments]    ${ue_id}
-    ${response}=    Get UE By ID    ${ue_id}
-    Should Not Be Equal As Integers    ${response.status_code}    200
